@@ -12,7 +12,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password:
             ${{ secrets.CR_PAT }}
-      - run: sh build
+      - run: bash -x build
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
       - run: docker push ghcr.io/clutroth/dockerpi3:latest
