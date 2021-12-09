@@ -15,4 +15,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./build
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/docker-dockerpi3:latest
-      - run: docker push ghcr.io/clutroth/dockerpi3:latest
+      - run: docker push ghcr.io/clutroth/docker-dockerpi3:latest
