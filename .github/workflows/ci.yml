@@ -14,9 +14,10 @@ jobs:
           password:
             ${{ secrets.CR_PAT }}
       - uses: actions/checkout@v2
-      - rlatestun: ./build
+      - run: ./build
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:${VERSION}
       - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vmlatest
       - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vm${VERSION}
       - run: docker push --all-tags
+        
