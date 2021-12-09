@@ -12,6 +12,8 @@ jobs:
           username: ${{ github.repository_owner }}
           password:
             ${{ secrets.CR_PAT }}
+      - run: ls ${GITHUB_WORKSPACE}
+      - run: ls ${GITHUB_WORKSPACE}/..
       - run: ${GITHUB_WORKSPACE}/build
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
