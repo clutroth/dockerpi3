@@ -11,7 +11,7 @@ jobs:
         run: |
           echo $CR_PAT | docker login ghcr.io -u clutroth --password-stdin
         env:
-          CR_PAT: ${{ secrets.DOCKER_PASSWORD }}
+          CR_PAT: ${{ secrets.CR_PAT }}
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
       - run: docker push ghcr.io/clutroth/dockerpi3:latest
