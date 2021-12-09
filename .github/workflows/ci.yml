@@ -19,4 +19,4 @@ jobs:
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:${VERSION}
       - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vmlatest
       - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vm${VERSION}
-      - run: docker push --all-tags clutroth/dockerpi
+      - run: docker images --format="{{.Repository}}:{{.Tag}}" --filter=reference='ghcr.io/clutroth/dockerpi3:*' | xargs docker push
