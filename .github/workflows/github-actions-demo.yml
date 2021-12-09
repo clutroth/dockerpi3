@@ -4,8 +4,17 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Dind action
-        uses: ouzi-dev/dind-action@v1.0.1
-      - run: docker login -u clutroth -p ${DOCKERHUB_TOKEN}
+      - uses: actions/cache@v2
+        with:
+          path: cache-file.tar
+          key: ${{ runner.os }}-${{ hashFiles('project.clj') }}
+      - uses: into-docker/build-action@v2
+        with:
+          image: target-image:latest
+          builder: intodocker/clojure
+          cache-path: cache-file.tar
       - run: ./build
-      - run: docker push
+      - run: >
+          echo ${{ secrets.DOCKERHUB_TOKEN }} | \
+            docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin && \
+            docker push clutroth/dockerpi:latest
