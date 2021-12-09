@@ -10,8 +10,8 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('project.clj') }}
       - uses: into-docker/build-action@v2
         with:
-          image: target-image:latest
-          builder: intodocker/clojure
+          image: clutroth/dockerpi:latest
+          builder: intodocker/intodocker
           cache-path: cache-file.tar
       - run: ./build
       - run: >
