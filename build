@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker build -t clutroth/dockerpi:latest dockerpi
-docker build -t clutroth/dockerpi:vmlatest dockerpi-vm
+docker build -t clutroth/dockerpi:latest --target full .
+docker build -t clutroth/dockerpi:vmlatest --target vm .
