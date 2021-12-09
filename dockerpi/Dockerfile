@@ -22,7 +22,3 @@ ENTRYPOINT qemu-system-aarch64 -m 1024 -M raspi3 \
   -nographic \
   -device usb-net,netdev=net0 -netdev user,id=net0,hostfwd=tcp::22-:22
 
-FROM vm AS full
-RUN apk add --no-cache qemu-img
-COPY --from=image *-raspios-bullseye-armhf-lite.img /sd.img
-RUN qemu-img resize /sd.img 2G

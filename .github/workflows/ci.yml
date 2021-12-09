@@ -3,7 +3,7 @@ on: [push]
 env:
   VERSION: 0.0.1
 jobs:
-  publish-hello-world-image:
+  publish-docker-images:
     runs-on: ubuntu-latest
     steps:
       - name: Login to GitHub Container Registry
@@ -20,4 +20,3 @@ jobs:
       - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vmlatest
       - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vm${VERSION}
       - run: docker push --all-tags
-        
