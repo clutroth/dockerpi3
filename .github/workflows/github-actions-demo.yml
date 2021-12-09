@@ -1,9 +1,10 @@
 name: GitHub Actions Demo
 on: [push]
+env:
+  VERSION: 0.0.1
 jobs:
   publish-hello-world-image:
     runs-on: ubuntu-latest
-
     steps:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -13,6 +14,9 @@ jobs:
           password:
             ${{ secrets.CR_PAT }}
       - uses: actions/checkout@v2
-      - run: ./build
-      - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/docker-dockerpi3:latest
-      - run: docker push ghcr.io/clutroth/docker-dockerpi3:latest
+      - rlatestun: ./build
+      - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
+      - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:${VERSION}
+      - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vmlatest
+      - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vm${VERSION}
+      - run: docker push --all-tags
