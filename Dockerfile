@@ -11,16 +11,19 @@ RUN unzip raspios-bullseye-armhf-lite.zip
 
 ENV LIBGUESTFS_BACKEND=direct
 RUN virt-copy-out -m /dev/sda1 -a *-raspios-bullseye-armhf-lite.img /kernel8.img /bcm2710-rpi-3-b-plus.dtb ./
+RUN touch /tmp/ssh
+RUN virt-copy-in -m /dev/sda1 -a *-raspios-bullseye-armhf-lite.img /tmp/ssh /
 
 FROM alpine:3.15 AS vm
 RUN apk add --no-cache qemu-system-aarch64
 COPY --from=image kernel8.img kernel8.img
 COPY --from=image bcm2710-rpi-3-b-plus.dtb bcm2710-rpi-3-b-plus.dtb
+EXPOSE 5022
 ENTRYPOINT qemu-system-aarch64 -m 1024 -M raspi3 \
   -kernel kernel8.img -dtb bcm2710-rpi-3-b-plus.dtb -sd /sd.img \
   -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
   -nographic \
-  -device usb-net,netdev=net0 -netdev user,id=net0,hostfwd=tcp::22-:22
+  -device usb-net,netdev=net0 -netdev user,id=net0,hostfwd=tcp::5022-:22
 
 FROM vm AS full
 RUN apk add --no-cache qemu-img

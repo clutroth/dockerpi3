@@ -11,12 +11,12 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password:
-            ${{ secrets.CR_PAT }}
+          password: ${{ secrets.CR_PAT }}
       - uses: actions/checkout@v2
       - run: ./build
+      - run: ./test
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:latest
       - run: docker tag clutroth/dockerpi:latest ghcr.io/clutroth/dockerpi3:${VERSION}
-      - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vmlatest
-      - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vm${VERSION}
+      - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vm-latest
+      - run: docker tag clutroth/dockerpi:vmlatest ghcr.io/clutroth/dockerpi3:vm-${VERSION}
       - run: docker images --format="{{.Repository}}:{{.Tag}}" --filter=reference='ghcr.io/clutroth/dockerpi3:*' | xargs -L 1 docker push
