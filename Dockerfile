@@ -14,7 +14,7 @@ RUN virt-copy-out -m /dev/sda1 -a *-raspios-bullseye-armhf-lite.img /kernel8.img
 RUN touch /tmp/ssh
 RUN virt-copy-in -m /dev/sda1 -a *-raspios-bullseye-armhf-lite.img /tmp/ssh /
 
-FROM alpine:3.15 AS vm
+FROM alpine:3.16.1 AS vm
 RUN apk add --no-cache qemu-system-aarch64
 COPY --from=image kernel8.img kernel8.img
 COPY --from=image bcm2710-rpi-3-b-plus.dtb bcm2710-rpi-3-b-plus.dtb
