@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS image
+FROM ubuntu:23.04 AS image
 ENV IMG_URL="http://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-11-08/2021-10-30-raspios-bullseye-armhf-lite.zip"
 ENV IMG_SHA256="008d7377b8c8b853a6663448a3f7688ba98e2805949127a1d9e8859ff96ee1a9"
 ENV DEBIAN_FRONTEND=noninteractive
